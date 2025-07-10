@@ -1,1 +1,1 @@
-# TaskNova-Personal-Task-&-Timetable-Management
+# TaskNova-Task Manager
