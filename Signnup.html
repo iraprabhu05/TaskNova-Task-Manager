@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TaskNova Signup</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6c5b7b, #867297);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #ffffff;
+    }
+
+    .signup-container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 350px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #ffffff;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    input:focus {
+      outline: none;
+      border: 2px solid #52455e;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #52455e;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #9f8fac;
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #e6e6e6;
+    }
+
+    a {
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #e6e6e6;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Create your TaskNova Account</h2>
+    <form id="signup-form">
+      <input type="text" id="username" placeholder="Choose a username" required />
+      <input type="password" id="password" placeholder="Create a password" required />
+      <input type="password" id="confirmPassword" placeholder="Confirm password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+      alert('Signup successful! You can now login.');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
