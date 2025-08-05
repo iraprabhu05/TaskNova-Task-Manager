@@ -1,50 +1,29 @@
 # TaskNova-Task Manager
+Smart. Simple. Just what you need.
 
-### Smart. Simple. Just what you need.
-
-**TaskNova** is a sleek, student-oriented productivity app built to help users plan their weekly schedule, manage tasks, and stay organized — all in one clean dashboard. With support for dark mode, login/signup, and interactive sections, it’s designed to make staying productive feel effortless.
-
----
-
-## 🌟 Features
-
-- 🗓️ **Weekly Timetable**  
-  Add time slots for each day of the week. Activities are saved locally and arranged in a clean, scrollable grid layout.
-
-- ✅ **Task Manager**  
-  Add tasks with categories and due dates. Tasks are saved and deletable with one click.
-
-- 🌙 **Dark Mode**  
-  Toggle between light and dark themes. Preference is saved using `localStorage`.
-
-- 🔐 **Login / Signup System**  
-  Users can register (saved in local storage) and log in with credentials. Login modal appears on the homepage without needing to leave the page.
-
-- 📱 **Responsive Design**  
-  Works on desktop and mobile. No scrollbars or layout breakage.
-
-- 🔄 **Section-Based Navigation**  
-  Smooth scrolling between sections like About, Services, and Contact — each fits perfectly on screen without overlap.
+**TaskNova** is a sleek, student-focused productivity tool that helps you manage your tasks, plan your schedule, and stay focused — all in one responsive web app. With a beautiful interface and smooth scrolling sections, it's built for students who want control and clarity.
 
 ---
 
-## 🛠️ Technologies Used
+## Features:
 
-### 💻 Frontend:
-- **HTML5**
-- **CSS3**
-- **JavaScript (Vanilla)**
+• 🗓️ Weekly Timetable: Add custom time slots by day. View and organize activities in a visual timetable grid.
 
-### 📦 Data Handling:
-- `localStorage` — for login, signup, tasks, and timetable data
+• ✅ Task Manager: Add, view, and delete daily tasks with category and due date support.
 
-### 📐 UI/UX:
-- Custom modal windows for login/signup
-- Fully responsive layout using Flexbox + Grid
-- Manual smooth scroll and section snapping logic
+• 🌙 Dark Mode Toggle: Instantly switch themes — preferences are saved in the browser.
+
+• 🔐 Login/Signup System: Basic authentication using localStorage with a modal-based interface.
+
+• 📱 Responsive Design: Fully functional on both mobile and desktop.
+
+• 🧭 Smooth Section Navigation: Clickable links scroll directly to About, Services, and Contact — with fullscreen view per section.
 
 ---
 
+## Technologies Used:
 
-```bash
-git clone https://github.com/your-username/tasknova.git
+• Frontend: HTML, CSS, JavaScript  
+• State Management: LocalStorage (for login, tasks, timetable)  
+
+---
