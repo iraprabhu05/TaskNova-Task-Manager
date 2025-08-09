@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TaskNova-Task Manager</title>
   <link rel="icon" type="image/png" href="images/favicon.png" />
-
   <style>
     /* -------------------- GLOBAL STYLES -------------------- */
     html { scroll-behavior: smooth; }
@@ -17,6 +16,11 @@
       padding: 0;
       color: white;
       overflow-x: hidden;
+    }
+
+    body.dark {
+      background: #121212;
+      color: #eee;
     }
 
     /* -------------------- NAVIGATION BAR -------------------- */
@@ -86,6 +90,7 @@
       font-size: 24px;
       cursor: pointer;
       z-index: 1000;
+      color: white;
     }
 
     /* -------------------- SECTIONS -------------------- */
@@ -294,9 +299,6 @@
 
 <body>
 
-  <!-- Theme Toggle Button -->
-  <button id="themeToggle">🌙</button>
-
   <!-- Navigation -->
   <nav>
     <ul>
@@ -307,6 +309,9 @@
     </ul>
     <button class="login-btn-fixed" onclick="openLoginModal()">Login</button>
   </nav>
+
+  <!-- Theme toggle button -->
+  <button id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
 
   <!-- Hero / Home -->
   <section id="home" class="section fade-in">
@@ -372,10 +377,10 @@
     <div class="modal-content" onclick="event.stopPropagation()">
       <h2>Login to TaskNova</h2>
       <form id="login-form">
-        <input type="text" id="username" placeholder="Enter your username" required>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <input type="text" id="username" placeholder="Enter your username" required autocomplete="username" />
+        <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password" />
         <button type="submit">Login</button>
-        <p><a href="forgot-password.html">Forgot your password?</a></p>
+        <p><a href="Forgot-password.html">Forgot your password?</a></p>
       </form>
       <button class="social-button google-btn" type="button" onclick="window.open('https://accounts.google.com/signin', '_blank')">
         Sign in with Google
@@ -383,32 +388,35 @@
       <button class="social-button facebook-btn" type="button" onclick="window.open('https://www.facebook.com/login/', '_blank')">
         Sign in with Facebook
       </button>
-      <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+      <p>Don't have an account? <a href="Signup.html">Sign up here</a></p>
     </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
+    // Theme toggle logic
     const themeToggle = document.getElementById("themeToggle");
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark");
       themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
     });
 
+    // Modal open/close functions
     function openLoginModal() {
       document.getElementById('loginModal').style.display = 'flex';
     }
-
     function closeLoginModal(event) {
       if (event.target === document.getElementById('loginModal')) {
         document.getElementById('loginModal').style.display = 'none';
       }
     }
 
+    // Login form submit handler
     document.getElementById('login-form').addEventListener('submit', function(event) {
       event.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
       const storedUsername = localStorage.getItem('username');
       const storedPassword = localStorage.getItem('password');
 
@@ -416,7 +424,7 @@
         alert('Login successful!');
         window.location.href = 'TaskNova.html';
       } else {
-        alert('Incorrect username or password!');
+        alert('Incorrect username or password. Please try again.');
       }
     });
   </script>
