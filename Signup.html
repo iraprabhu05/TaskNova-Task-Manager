@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TaskNova Signup</title>
   <style>
     body {
@@ -33,23 +33,56 @@
       color: #ffffff;
     }
 
-    input {
+    form {
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #e0dfe3;
+    }
+
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       padding: 12px;
-      margin: 12px 0;
       border: none;
       border-radius: 6px;
       font-size: 16px;
       background-color: #ffffff;
       color: #333;
+      box-sizing: border-box;
     }
 
-    input:focus {
+    input[type="text"]:focus,
+    input[type="password"]:focus {
       outline: none;
       border: 2px solid #52455e;
     }
 
-    button {
+    .error-message {
+      color: #f28b82;
+      font-size: 13px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+
+    .password-toggle {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #ccc;
+      cursor: pointer;
+      user-select: none;
+      display: inline-block;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    button[type="submit"] {
       width: 100%;
       padding: 12px;
       background-color: #52455e;
@@ -59,10 +92,16 @@
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      margin-top: 10px;
+      margin-top: 20px;
+      opacity: 1;
     }
 
-    button:hover {
+    button[type="submit"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    button[type="submit"]:hover:enabled {
       background-color: #9f8fac;
     }
 
@@ -70,6 +109,7 @@
       margin-top: 20px;
       font-size: 14px;
       color: #e6e6e6;
+      text-align: center;
     }
 
     a {
@@ -86,33 +126,122 @@
 <body>
   <div class="signup-container">
     <h2>Create your TaskNova Account</h2>
-    <form id="signup-form">
-      <input type="text" id="username" placeholder="Choose a username" required />
-      <input type="password" id="password" placeholder="Create a password" required />
-      <input type="password" id="confirmPassword" placeholder="Confirm password" required />
-      <button type="submit">Sign Up</button>
+    <form id="signup-form" novalidate autocomplete="off">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Choose a username" required autocomplete="username" />
+      <div id="username-error" class="error-message"></div>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Create a password" required autocomplete="new-password" />
+      <div id="password-error" class="error-message"></div>
+      <button type="button" id="toggle-password" class="password-toggle">Show Password</button>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required autocomplete="new-password" />
+      <div id="confirm-password-error" class="error-message"></div>
+      <button type="button" id="toggle-confirmPassword" class="password-toggle">Show Password</button>
+
+      <button type="submit" id="submit-btn" disabled>Sign Up</button>
     </form>
     <p>Already have an account? <a href="Main Website.html">Login here</a></p>
   </div>
 
-  <script>
-    document.getElementById('signup-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
+<script>
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirmPassword');
+  const submitBtn = document.getElementById('submit-btn');
 
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return;
-      }
+  const usernameError = document.getElementById('username-error');
+  const passwordError = document.getElementById('password-error');
+  const confirmPasswordError = document.getElementById('confirm-password-error');
 
-      localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
-      alert('Signup successful! You can now login.');
-      window.location.href = 'Main Website.html';
-    });
-  </script>
+  const togglePassword = document.getElementById('toggle-password');
+  const toggleConfirmPassword = document.getElementById('toggle-confirmPassword');
+
+  function validateUsername() {
+    const username = usernameInput.value.trim();
+    if (username.length < 3) {
+      usernameError.textContent = 'Username must be at least 3 characters.';
+      return false;
+    }
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      usernameError.textContent = 'Username can only contain letters, numbers, and underscores.';
+      return false;
+    }
+    usernameError.textContent = '';
+    return true;
+  }
+
+  function validatePassword() {
+    const password = passwordInput.value.trim();
+    if (password.length < 6) {
+      passwordError.textContent = 'Password must be at least 6 characters.';
+      return false;
+    }
+    passwordError.textContent = '';
+    return true;
+  }
+
+  function validateConfirmPassword() {
+    const password = passwordInput.value.trim();
+    const confirmPassword = confirmPasswordInput.value.trim();
+    if (confirmPassword !== password) {
+      confirmPasswordError.textContent = 'Passwords do not match.';
+      return false;
+    }
+    confirmPasswordError.textContent = '';
+    return true;
+  }
+
+  function validateForm() {
+    const isUsernameValid = validateUsername();
+    const isPasswordValid = validatePassword();
+    const isConfirmValid = validateConfirmPassword();
+    submitBtn.disabled = !(isUsernameValid && isPasswordValid && isConfirmValid);
+  }
+
+  usernameInput.addEventListener('input', validateForm);
+  passwordInput.addEventListener('input', validateForm);
+  confirmPasswordInput.addEventListener('input', validateForm);
+
+  togglePassword.addEventListener('click', () => {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      togglePassword.textContent = 'Hide Password';
+    } else {
+      passwordInput.type = 'password';
+      togglePassword.textContent = 'Show Password';
+    }
+  });
+
+  toggleConfirmPassword.addEventListener('click', () => {
+    if (confirmPasswordInput.type === 'password') {
+      confirmPasswordInput.type = 'text';
+      toggleConfirmPassword.textContent = 'Hide Password';
+    } else {
+      confirmPasswordInput.type = 'password';
+      toggleConfirmPassword.textContent = 'Show Password';
+    }
+  });
+
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    validateForm();
+    if (submitBtn.disabled) return;
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    // Save data to localStorage (demo only!)
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
+
+    alert('Signup successful! You can now login.');
+    this.reset(); // reset form fields
+    window.location.href = 'Main Website.html';
+  });
+</script>
+
 </body>
 </html>
-
