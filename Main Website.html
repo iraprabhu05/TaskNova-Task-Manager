@@ -310,9 +310,6 @@
     <button class="login-btn-fixed" onclick="openLoginModal()">Login</button>
   </nav>
 
-  <!-- Theme toggle button -->
-  <button id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
-
   <!-- Hero / Home -->
   <section id="home" class="section fade-in">
     <div class="hero-image-container">
@@ -393,12 +390,7 @@
   </div>
 
   <script>
-    // Theme toggle logic
-    const themeToggle = document.getElementById("themeToggle");
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-    });
+    
 
     // Modal open/close functions
     function openLoginModal() {
