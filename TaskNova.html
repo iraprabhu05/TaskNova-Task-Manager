@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskNova - Dashboard</title>
+  <link rel="stylesheet" href="CSS.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1 class="logo"><a href="Main Website.html">TaskNova</a></h1>
+    <button id="themeToggle">🌙</button>
+  </header>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      body.classList.add("dark");
+      themeToggle.textContent = "☀️";
+    } else {
+      themeToggle.textContent = "🌙";
+    }
+
+    // Toggle dark mode on button click
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      if (body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        themeToggle.textContent = "☀️";
+      } else {
+        localStorage.setItem("theme", "light");
+        themeToggle.textContent = "🌙";
+      }
+    });
+  });
+</script>
+
+  <section id="pomodoro" class="panel">
+    <h2>🍅 Pomodoro Timer</h2>
+    <div id="timer">25:00</div>
+    <div class="button-group">
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="resetBtn">Reset</button>
+
+      <div id="customTimerControl" style="margin-bottom: 1rem; text-align: center;">
+        <input
+          type="number"
+          id="customMinutes"
+          min="1"
+          max="120"
+          placeholder="Set minutes (1-120)"
+          style="width: 150px; padding: 0.5rem; font-size: 1rem;"
+        />
+        <button id="setCustomTimerBtn" style="padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer;">
+          Set Timer
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="dashboard">
+    <!-- Tasks Panel -->
+    <section class="panel">
+      <h2>Tasks</h2>
+      <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="Task title" required />
+        <select id="taskCategory">
+          <option value="Assignment">Assignment</option>
+          <option value="Exam">Exam</option>
+          <option value="Personal">Personal</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="date" id="taskDate" required />
+        <button type="submit">Add Task</button>
+      </form>
+      <ul id="taskList"></ul>
+    </section>
+    
+    <!-- Stats Panel -->
+    <section class="panel" id="statsPanel">
+      <h2>📊 Stats</h2>
+      <div>Total tasks: <span id="totalTasks">0</span></div>
+      <div>Completed tasks: <span id="completedTasks">0</span></div>
+      <h3>Tasks by Category:</h3>
+      <ul id="categoryStats"></ul>
+
+      <!-- Chart -->
+      <canvas id="categoryChart" width="300" height="200"></canvas>
+    </section>
+
+    <!-- Timetable -->
+    <section class="panel timetable-panel">
+      <h2>Weekly Timetable</h2>
+      <div style="margin-bottom: 10px; display: flex; justify-content: flex-end;">
+  <a href="#" id="downloadPdfBtn" style="text-decoration: underline; color: inherit; cursor: pointer;">
+    📥 Download Timetable (PDF)
+  </a>
+</div>
+
+      <form id="customTimetableForm">
+        <input type="text" id="customTimeSlot" placeholder="Time slot (e.g. 9:00 - 10:00)" required />
+        <select id="customDay" required>
+          <option disabled selected>Choose Day</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+          <option>Saturday</option>
+          <option>Sunday</option>
+        </select>
+        <input type="text" id="customActivity" placeholder="Activity" required />
+        <button type="submit">Add to Timetable</button>
+      </form>
+
+
+      <div class="real-timetable">
+        <table id="timetableTable">
+          <thead>
+            <tr>
+              <th>Day</th>
+            </tr>
+          </thead>
+          <tbody id="timetableBody">
+            <!-- Dynamic rows will go here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
