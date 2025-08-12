@@ -26,7 +26,7 @@ Smart. Simple. Just what you need.
 
 ---
 
-##Technologies Used
+## Technologies Used:
 
 HTML, CSS, JavaScript for frontend
 
