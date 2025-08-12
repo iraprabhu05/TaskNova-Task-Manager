@@ -16,17 +16,24 @@ Smart. Simple. Just what you need.
 
 • 🌙 Dark Mode Toggle: Instantly switch themes — preferences are saved in the browser.
 
-• 🔐 Login/Signup System: Basic authentication using localStorage with a modal-based interface.
+•  🍅 Pomodoro Timer — Built-in timer with start, pause, reset, and custom time options to boost focus.
 
 • 📱 Responsive Design: Fully functional on both mobile and desktop.
 
 • 🧭 Smooth Section Navigation: Clickable links scroll directly to About, Services, and Contact — with fullscreen view per section.
 
+• 📥 Download Timetable as PDF — Export your timetable to PDF for offline use.
+
 ---
 
-## Technologies Used:
+##Technologies Used
 
-• Frontend: HTML, CSS, JavaScript  
-• State Management: LocalStorage (for login, tasks, timetable)  
+HTML, CSS, JavaScript for frontend
+
+LocalStorage for persistent state management (login, tasks, theme, timetable)
+
+Chart.js for visual stats representation
+
+html2canvas and jsPDF for PDF exporte (for login, tasks, timetable)  
 
 ---
