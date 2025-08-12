@@ -37,3 +37,8 @@ Chart.js for visual stats representation
 html2canvas and jsPDF for PDF exporte (for login, tasks, timetable)  
 
 ---
+
+
+
+https://github.com/user-attachments/assets/3ee4fb7c-ae86-4324-9751-33246226f23a
+
