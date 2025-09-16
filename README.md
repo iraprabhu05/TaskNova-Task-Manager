@@ -34,7 +34,7 @@ LocalStorage for persistent state management (login, tasks, theme, timetable)
 
 Chart.js for visual stats representation
 
-html2canvas and jsPDF for PDF exporte (for login, tasks, timetable)  
+
 
 ---
 
